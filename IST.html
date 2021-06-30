@@ -265,21 +265,24 @@
         </center>
         <p>
         <left>
-          Modern deep neural networks are highly over-parameterized compared to the data on which they are trained,
-          yet they often generalize remarkably well. A flurry of recent work has asked: why do deep networks not overfit to their training data?
-          We investigate the hypothesis that deeper nets are implicitly biased to find lower rank solutions, and these are solutions that generalize well.
-          We prove that the percent volume of low effective-rank solutions increases monotonically as linear neural networks are made deeper.
-          We empirically find that a similar result holds for non-linear networks: deeper non-linear networks learn a feature space whose kernel has a lower rank.
-          We then demonstrate how linear over-parameterization of deep non-linear models can be used to induce low-rank bias,
-          improving generalization performance without changing model capacity.
-          We evaluate on various model architectures and demonstrate that linearly over-parameterized models outperform existing baselines on image classification tasks, including ImageNet.
+          Distributed machine learning (ML) can bring more computational resources to bear than single-machine learning, reducing training time. 
+Further, distribution allows models to be partitioned over many machines, allowing very large models to be trained—models that may be much larger than the available memory of any individual machine. 
+However, in practice, distributed ML remains challenging, primarily due to high communication costs. 
+We propose a new approach to distributed neural network learning, called independent subnet training (IST). 
+In IST, per iteration, a neural network is decomposed into a set of subnetworks of the same depth as the original network, each of which is trained locally, before the various subnets are exchanged and the process is repeated. 
+IST training has many advantages over standard data parallel approaches. 
+Because the original network is decomposed into independent parts, communication volume is reduced. 
+The decomposition makes IST naturally ``model parallel’’, and so IST scales to very large models that cannot fit on any single machine. 
+Furthermore, because the subsets are independent, communication frequency is reduced. 
+We show experimentally that IST results in training times that are much lower than data parallel approaches to distributed learning.
+Furthermore, IST scales to large models that cannot be learned using standard approaches.
         </left>
       </p>
       <br>
 	<hr>
 
 	<table align=center width=850px>
-		<center><h1>Abstract</h1></center>
+		<center><h1>The idea of Independent Subnetwork Training (IST)</h1></center>
 		<tr>
 			<td>
 				This is my abstract.
