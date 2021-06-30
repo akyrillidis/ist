@@ -257,6 +257,12 @@
             </tr></tbody>
           </table>
 
+		    <td align=center width=960px>
+						<center>
+						<td><img class="round" style="width:960px" src="./assets/img/cascades.png"/></td>
+						</center>
+					</td>
+		    
 	<br><hr>
         <center>
           <h2>
@@ -308,20 +314,7 @@ Furthermore, IST scales to large models that cannot be learned using standard ap
   						<li>We evaluate IST on speech recognition, image classification (CIFAR10 and full ImageNet), and a large-scale Amazon product recommendation task. We find that IST results in up to a 10x speedup for time-to-convergence, compared to a state-of-the-art data parallel realization, using bandwidth-optimal ring all-reduce, as well as the ``vanilla'' local SGD method.</li>
   						<li>Because IST allows for efficient implicit model parallel training, we show that IST can solve an ``extreme'' Amazon product recommendation task with improved generalization, by increasing the embedding dimensions for larger models, which is not supported by data parallel based training.</li>
 						<li>Finally, we present theoretical results showing that decomposing a neural network into subnets for distributed training still allows for convergence under a set of standard assumptions.</li>
-					</ul>
-				
-				<br><hr>
-				
-				<center><h1>Schematic description of IST</h1></center>
-				<table align=center width=500px>
-				<tr>
-					<td align=center width=500px>
-						<center>
-						<td><img class="round" style="width:500px" src="./assets/img/cascades.png"/></td>
-						</center>
-					</td>
-				</tr>
-				</table>
+					</ul>																
 			</td>
 		</tr>
 	</table>
