@@ -309,27 +309,52 @@ Furthermore, IST scales to large models that cannot be learned using standard ap
   						<li>Because IST allows for efficient implicit model parallel training, we show that IST can solve an ``extreme'' Amazon product recommendation task with improved generalization, by increasing the embedding dimensions for larger models, which is not supported by data parallel based training.</li>
 						<li>Finally, we present theoretical results showing that decomposing a neural network into subnets for distributed training still allows for convergence under a set of standard assumptions.</li>
 					</ul>
+				
+				<center><h3>Schematic description of IST</h3></center>
+				<table align=center width=400px>
+				<tr>
+					<td align=center width=500px>
+						<center>
+						<td><img class="round" style="width:450px" src="./assets/img/cascades.png"/></td>
+						</center>
+					</td>
+				</tr>
+				</table>
 			</td>
 		</tr>
 	</table>
 	<br>
 
-	<hr>
-	<center><h1>Talk</h1></center>
-	<p align="center">
-		<iframe width="660" height="395" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen align="center"></iframe>
-	</p>
-
-	<table align=center width=800px>
-		<br>
+	<table align=center width=960px>
+		<center><h1>Results</h1></center>
 		<tr>
-			<center>
-				<span style="font-size:28px"><a href=''>[Slides]</a>
-				</span>
-			</center>
+			<td>
+				The central idea in this paper, called independent subnet training (IST), facilitates combined model and data parallel distributed training. 
+				IST utilizes ideas from dropout and approximate matrix multiplication.
+				IST decomposes the NN layers into a set of subnets for the same task, by partitioning the neurons across different sites.
+				Each of those subnets is trained for one or more local stochastic gradient descent (SGD) iterations, before synchronization. <br> <br>
+
+				Since subnets share no parameters in the distributed setting, synchronization requires no aggregation on these parameters, in contrast to the data parallel method---it is just an exchange of parameters.
+				Moreover, because subnets are sampled without replacement, the interdependence among them is minimized, which allows their local SGD updates for a larger number of iterations without significant ``model drifting'', before synchronizing. 
+				This reduces communication frequency. 
+				Communication costs per synchronization step are also reduced because in an n-machine cluster, each machine gets between 1/n^2 and 1/n of the weights---contrast this to data parallel training, when each machine must receive all of the weights. <br> <br>
+
+				IST has advantages over model parallel approaches.  
+				Since subnets are trained independently during local updates, no synchronization between subnetworks is required.
+				Yet, IST inherits the advantages of model parallel methods. Since each machine gets just a small fraction of the overall model, IST allows the training of very large models that cannot fit into the RAM of a node or a device. 
+				This can be an advantage when training large models using GPUs, which tend to have limited memory. <br> <br> 
+				
+				<p><b>Contributions.</b>This paper has the following key contributions:</p>
+					<ul>
+  						<li>We propose independent subnet training, a method for combined model parallel/data parallel training of neural networks on a cluster of machines. IST is specifically designed to work well on public clouds, where it is difficult to realize high-performance, distributed training.  These clouds often combine high performance CPUs and GPUs with relatively low-speed inter-machine inerconnects.</li>
+  						<li>We evaluate IST on speech recognition, image classification (CIFAR10 and full ImageNet), and a large-scale Amazon product recommendation task. We find that IST results in up to a 10x speedup for time-to-convergence, compared to a state-of-the-art data parallel realization, using bandwidth-optimal ring all-reduce, as well as the ``vanilla'' local SGD method.</li>
+  						<li>Because IST allows for efficient implicit model parallel training, we show that IST can solve an ``extreme'' Amazon product recommendation task with improved generalization, by increasing the embedding dimensions for larger models, which is not supported by data parallel based training.</li>
+						<li>Finally, we present theoretical results showing that decomposing a neural network into subnets for distributed training still allows for convergence under a set of standard assumptions.</li>
+					</ul>
+			</td>
 		</tr>
 	</table>
-	<hr>
+	<br>
 
 	<center><h1>Code</h1></center>
 
