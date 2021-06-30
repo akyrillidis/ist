@@ -288,12 +288,12 @@ Furthermore, IST scales to large models that cannot be learned using standard ap
 				The central idea in this paper, called independent subnet training (IST), facilitates combined model and data parallel distributed training. 
 				IST utilizes ideas from dropout and approximate matrix multiplication.
 				IST decomposes the NN layers into a set of subnets for the same task, by partitioning the neurons across different sites.
-				Each of those subnets is trained for one or more local stochastic gradient descent (SGD) iterations, before synchronization. <br>
+				Each of those subnets is trained for one or more local stochastic gradient descent (SGD) iterations, before synchronization. <br> <br>
 
 				Since subnets share no parameters in the distributed setting, synchronization requires no aggregation on these parameters, in contrast to the data parallel method---it is just an exchange of parameters.
 				Moreover, because subnets are sampled without replacement, the interdependence among them is minimized, which allows their local SGD updates for a larger number of iterations without significant ``model drifting'', before synchronizing. 
 				This reduces communication frequency. 
-				Communication costs per synchronization step are also reduced because in an $$n$$-machine cluster, each machine gets between $$\frac{1}{n^2}$$ and $$\frac{1}{n}$$ of the weights---contrast this to data parallel training, when each machine must receive all of the weights. <br>
+				Communication costs per synchronization step are also reduced because in an $$n$$-machine cluster, each machine gets between $$\frac{1}{n^2}$$ and $$\frac{1}{n}$$ of the weights---contrast this to data parallel training, when each machine must receive all of the weights. <br> <br>
 
 				IST has advantages over model parallel approaches.  
 				Since subnets are trained independently during local updates, no synchronization between subnetworks is required.
