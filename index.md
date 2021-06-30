@@ -2,28 +2,20 @@
 layout: default
 ---
 
-We propose the exploration of **new theory and algorithms for quantum system characterization**. With more qubits, the volume of generated data outgrows our computational capacity of classical tomography methods, posing major challenges. The goal of this project is to close this gap, by investigating ways to accelerate such protocols, with guarantees.
+Neural networks (NN) are ubiquitous, and have led to the recent success of machine learning (ML). This surge, though, for ever increasing performance comes at a cost: to obtain better ML models, larger NNs need to be trained and utilized. In stark contrast, for many applications, model training and infer- ence need to be carried out in a timely fashion on a computation-/communication-light, and energy-limited platform. Optimizing the NN training in terms of computation/com- munication/energy efficiency, while retaining competitive accuracy, has become a fundamental challenge.
 
-This project focuses on benchmarking and testing quantum computation systems, through efficient, robust and provable quantum state tomography, as well as novel noise-robust validation and certification tools for quantum computing. We investigate new theoretical and practical approaches, via the following three paths: **\\(i)\\) by provably distributing computations in a non-convex way for large-scale quantum state tomography (QST), \\(ii)\\) by robustifying state of the art validation methods using robust optimization and techniques, and finally, \\(iii)\\) by designing efficient and robust schemes for validating and certifying specific experimentally-relevant quantum operations**. 
-
-We propose to evaluate the theoretical studies with experiments on available prototypes of quantum processors, in order to assess their practicality in real scenaria.
+We propose a new class of neural network (NN) training algorithms, called independent subetwork training (IST). IST decomposes the NN into a set of independent subnetworks. Each of those sub- networks is trained at a different device, for one or more backpropagation steps, before a synchronization step. Updated subnetworks are sent from edge-devices to the parameter server for reassembly into the original NN, before the next round of decomposition and local training. Because the subnetworks share no parameters, synchronization requires no aggregation—it is just an exchange of parameters. Moreover, each of the subnetworks is a fully-operational classifier by itself; no synchronization pipelines between subnet- works are required. Key attributes of our proposal is that $$i)$$ decomposing a NN into more subnetworks means that each device receives fewer parameters, as well as reduces the cost of the synchronization step, and $$ii)$$ each device trains a much smaller model, resulting in less computational costs and better energy consumption. Thus, there is good reason to expect that IST will scale much better than a “data parallel” algorithm for mobile applications. We will investigate how to automatically optimize and configure an IST algorithm for various NN architectures, and propose a system implementation that scales up and out for mobile applications, to achieve the optimal speedup.
 
 Results by this projects include: 
 
-- [Projected FGD for QST](./FGD.html).
-- [Momentum-Inspired FGD for QST](./MiFGD.html).
-
-For reproducility, we provide real quantum datasets:
-
-- [Real QST data](./data.html).
+- [Distributed Learning of Deep Neural Networks using Independent Subnet Training](./IST.html).
+- [GIST: Distributed Training for Large-Scale Graph Convolutional Networks](./GIST.html).
+- [ResIST: Layer-Wise Decomposition of ResNets for Distributed Training](./ResIST.html).
 
 ### Publications
 
-> Anastasios Kyrillidis, Amir Kalev, Dohyung Park, Srinadh Bhojanapalli, Constantine Caramanis, Sujay Sanghavi, [**``Provable compressed sensing quantum state tomography via non-convex methods''**](https://www.nature.com/articles/s41534-018-0080-4.pdf), npj Quantum Information volume 4, Article number: 36 (2018).
+> Binhang Yuan, Cameron R. Wolfe, Chen Dun, Yuxin Tang, Anastasios Kyrillidis, Christopher M. Jermaine, [**``Distributed Learning of Deep Neural Networks using Independent Subnet Training''**](https://arxiv.org/pdf/1910.02120), Arxiv Preprint, arXiv preprint arXiv:1910.02120 (2019).
 >
-> Kelly Geyer, Anastasios Kyrillidis, Amir Kalev, [**''Low-rank regularization and solution uniqueness in over-parameterized matrix sensing''**](http://proceedings.mlr.press/v108/geyer20a.html), Proceedings of the Twenty Third International Conference on Artificial Intelligence and Statistics, PMLR 108:930-940, 2020.
+> Cameron R. Wolfe, Jingkang Yang, Arindam Chowdhury, Chen Dun, Artun Bayer, Santiago Segarra, Anastasios Kyrillidis, [**''GIST: Distributed Training for Large-Scale Graph Convolutional Networks''**](https://arxiv.org/pdf/2102.10424), Arxiv Preprint, arXiv preprint arXiv:2102.10424 (2021).
 >
-> Mitchell Roddenberry, Santiago Segarra, Anastasios Kyrillidis, [**''Rank-One Measurements of Low-Rank PSD Matrices Have Small Feasible Sets''**](https://arxiv.org/pdf/2012.09768.pdf), Arxiv Preprint, arXiv preprint arXiv:2012.09768 (2020).
->
-> Junhyung Lyle Kim, George Kollias, Amir Kalev, Ken X. Wei, Anastasios Kyrillidis [**''Fast quantum state reconstruction via accelerated non-convex programming''**](https://arxiv.org/pdf/2104.07006.pdf), Sumitted, Arxiv Preprint, arXiv preprint arXiv:2104.07006, (2021).
-
+> Chen Dun, Cameron R. Wolfe, Christopher M. Jermaine, Anastasios Kyrillidis, [**''ResIST: Layer-Wise Decomposition of ResNets for Distributed Training''**](), Arxiv Preprint, arXiv preprint arXiv:xxxx.xxxx (2021).
