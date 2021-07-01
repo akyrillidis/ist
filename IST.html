@@ -318,7 +318,6 @@ Furthermore, IST scales to large models that cannot be learned using standard ap
 			</td>
 		</tr>
 	</table>
-	<br>
 
 	<br><hr>
 	<table align=center width=960px>
@@ -342,10 +341,8 @@ Furthermore, IST scales to large models that cannot be learned using standard ap
 						<td><img class="round" style="width:960px" src="./assets/img/fig1.png"/></td> 
 					</center>
 				</td>
-				<br>
 		    		<p>The figure and the table above generally show that IST is much faster compared to the other frameworks for achieving high levels of accuracy on a hold-out test set. For example, IST exhibits a 4.2x speedup compared to local SGD, and 10.6x speedup compared to classical data parallel for the 2-layer Google speech model to reach 77%. IST exhibits 6.1x speedup compared to local SGD, and a 16.6x speedup comparing to data parallel for the 3-layer model to reach the accuracy of 77%. 
 				Note that this was observed even though IST was handicapped by its use of gloo for its GPU implementation. Interestingly, for the full ImageNet data set, the communication bottleneck using AWS is so severe that the smaller clusters were always faster; at each cluster size, IST was still the fastest option. For CIFAR10, because CPUs were used for training, the network is less of a bottlneck and all methods were able to scale.  This negates the IST advantage just a bit. In this case, IST was fastest to 85% accuracy, but was slower to fine-tune to 90% accuracy in 8-CPU cluster.</p>
-				<br>
 
 				<br>
 				<td align=center width=960px>
@@ -353,11 +350,9 @@ Furthermore, IST scales to large models that cannot be learned using standard ap
 						<td><img class="round" style="width:500px" src="./assets/img/fig2.png"/></td>
 					</center>
 				</td>
-				<br>
 		    		<p>Another key advantage of IST is illustrated in the table above; because it is a model-parallel framework and distributes the model to multiple machines, IST is able to scale to virtually unlimited model sizes. In this case, it can compute 2560-dimensional embedding in 8-GPU cluster (and realize the associated, additional accuracy) whereas the data parallel approaches are unable to do this.</p>
 				<br>
 
-		    		<br>
 		    		<td align=center width=960px>
 					<center>
 						<td><img class="round" style="width:500px" src="./assets/img/fig3.png"/></td>
