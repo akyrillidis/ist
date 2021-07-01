@@ -331,16 +331,19 @@ Furthermore, IST scales to large models that cannot be learned using standard ap
 					<li>Image classification on CIFAR10 and full ImageNet: We train the Resnet18 model over CIFAR10, and the VGG12 model over full ImageNet. Note that we include the complete ImageNet dataset with all 21,841 categories and report the top-10 accuracy.  Because it is so difficult to train, there are few reported results over the complete ImageNet data set.</li>
 					<li>Amazon-670k: We train a 2-layer, fully-connected neural network, which accepts a 135,909-dimensional input feature, and generates a prediction over 670,091 output labels. Further details of the learning tasks and hyperparameter tuning description are enumerated in the full version of the paper. </li>
 				</ul>
-				<p>We train Google speech and Resnet18 on CIFAR10 on three AWS CPU clusters, with 2, 4, and 8 CPU instances (m5.2xlarge).  We train the VGG model on full ImageNet and Amazon-670k extreme classification network on three AWS GPU clusters, with 2, 4, and 8 GPU machines (p3.2xlarge). Our choice of AWS was deliberate, as it is a very common learning platform, and illustrates the challenge faced by many consumers: distributed ML without a super-fast interconnect.</p>				
-				
-				
-				<br>
+				<p>We train Google speech and Resnet18 on CIFAR10 on three AWS CPU clusters, with 2, 4, and 8 CPU instances (m5.2xlarge).  We train the VGG model on full ImageNet and Amazon-670k extreme classification network on three AWS GPU clusters, with 2, 4, and 8 GPU machines (p3.2xlarge). Our choice of AWS was deliberate, as it is a very common learning platform, and illustrates the challenge faced by many consumers: distributed ML without a super-fast interconnect.</p>																
+
+			</td>
+		</tr>
+	</table>
+	<br>
 				<td align=center width=960px>
 					<center>
 						<td><img class="round" style="width:960px" src="./assets/img/fig1.png"/></td> 
 					</center>
 				</td>
-							<br>
+				
+				<br>
 				<td align=center width=960px>
 					<center>
 						<td><img class="round" style="width:500px" src="./assets/img/fig2.png"/></td>
@@ -353,72 +356,9 @@ Furthermore, IST scales to large models that cannot be learned using standard ap
 						<td><img class="round" style="width:500px" src="./assets/img/fig3.png"/></td>
 					</center>
 				</td>
-
-			</td>
-		</tr>
-	</table>
 	<br>
 
-	<center><h1>Code</h1></center>
-
-	<table align=center width=420px>
-		<center>
-			<tr>
-				<td>
-				</td>
-			</tr>
-		</center>
-	</table>
-	<table align=center width=400px>
-		<tr>
-			<td align=center width=400px>
-				<center>
-					<td><img class="round" style="width:450px" src="./resources/method_diagram.png"/></td>
-				</center>
-			</td>
-		</tr>
-	</table>
-	<table align=center width=850px>
-		<center>
-			<tr>
-				<td>
-					Short description if wanted
-				</td>
-			</tr>
-		</center>
-	</table>
-	<table align=center width=800px>
-		<br>
-		<tr><center>
-			<span style="font-size:28px">&nbsp;<a href='https://github.com/richzhang/webpage-template'>[GitHub]</a>
-			</center>
-		</span>
-	</table>
-	<br>
-	<hr>
-	<table align=center width=450px>
-		<center><h1>Paper and Supplementary Material</h1></center>
-		<tr>
-			<td><a href=""><img class="layered-paper-big" style="height:175px" src="./resources/paper.png"/></a></td>
-			<td><span style="font-size:14pt">F. Author, S. Author, T. Author.<br>
-				<b>Creative and Descriptive Paper Title.</b><br>
-				In Conference, 20XX.<br>
-				(hosted on <a href="">ArXiv</a>)<br>
-				<!-- (<a href="./resources/camera-ready.pdf">camera ready</a>)<br> -->
-				<span style="font-size:4pt"><a href=""><br></a>
-				</span>
-			</td>
-		</tr>
-	</table>
-	<br>
-
-	<table align=center width=600px>
-		<tr>
-			<td><span style="font-size:14pt"><center>
-				<a href="./resources/bibtex.txt">[Bibtex]</a>
-			</center></td>
-		</tr>
-	</table>
+	
 
 	<hr>
 	<br>
@@ -428,7 +368,8 @@ Furthermore, IST scales to large models that cannot be learned using standard ap
 			<td width=400px>
 				<left>
 					<center><h1>Acknowledgements</h1></center>
-					This template was originally made by <a href="http://web.mit.edu/phillipi/">Phillip Isola</a> and <a href="http://richzhang.github.io/">Richard Zhang</a> for a <a href="http://richzhang.github.io/colorization/">colorful</a> ECCV project; the code can be found <a href="https://github.com/richzhang/webpage-template">here</a>.
+					
+					This code for this template can be found <a href="https://github.com/richzhang/webpage-template">here</a>.
 				</left>
 			</td>
 		</tr>
