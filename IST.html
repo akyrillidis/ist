@@ -325,28 +325,13 @@ Furthermore, IST scales to large models that cannot be learned using standard ap
 		<center><h1>Results</h1></center>
 		<tr>
 			<td>
-				The central idea in this paper, called independent subnet training (IST), facilitates combined model and data parallel distributed training. 
-				IST utilizes ideas from dropout and approximate matrix multiplication.
-				IST decomposes the NN layers into a set of subnets for the same task, by partitioning the neurons across different sites.
-				Each of those subnets is trained for one or more local stochastic gradient descent (SGD) iterations, before synchronization. <br> <br>
-
-				Since subnets share no parameters in the distributed setting, synchronization requires no aggregation on these parameters, in contrast to the data parallel method---it is just an exchange of parameters.
-				Moreover, because subnets are sampled without replacement, the interdependence among them is minimized, which allows their local SGD updates for a larger number of iterations without significant ``model drifting'', before synchronizing. 
-				This reduces communication frequency. 
-				Communication costs per synchronization step are also reduced because in an n-machine cluster, each machine gets between 1/n^2 and 1/n of the weights---contrast this to data parallel training, when each machine must receive all of the weights. <br> <br>
-
-				IST has advantages over model parallel approaches.  
-				Since subnets are trained independently during local updates, no synchronization between subnetworks is required.
-				Yet, IST inherits the advantages of model parallel methods. Since each machine gets just a small fraction of the overall model, IST allows the training of very large models that cannot fit into the RAM of a node or a device. 
-				This can be an advantage when training large models using GPUs, which tend to have limited memory. <br> <br> 
-				
-				<p><b>Contributions.</b>This paper has the following key contributions:</p>
-					<ul>
-  						<li>We propose independent subnet training, a method for combined model parallel/data parallel training of neural networks on a cluster of machines. IST is specifically designed to work well on public clouds, where it is difficult to realize high-performance, distributed training.  These clouds often combine high performance CPUs and GPUs with relatively low-speed inter-machine inerconnects.</li>
-  						<li>We evaluate IST on speech recognition, image classification (CIFAR10 and full ImageNet), and a large-scale Amazon product recommendation task. We find that IST results in up to a 10x speedup for time-to-convergence, compared to a state-of-the-art data parallel realization, using bandwidth-optimal ring all-reduce, as well as the ``vanilla'' local SGD method.</li>
-  						<li>Because IST allows for efficient implicit model parallel training, we show that IST can solve an ``extreme'' Amazon product recommendation task with improved generalization, by increasing the embedding dimensions for larger models, which is not supported by data parallel based training.</li>
-						<li>Finally, we present theoretical results showing that decomposing a neural network into subnets for distributed training still allows for convergence under a set of standard assumptions.</li>
-					</ul>
+				<p><b>Learning tasks and environments:</b></p>
+				<ul>
+					<li>Google Speech Commands: We learn a 2-layer network of 4096 neurons and a 3-layer network of 8192 neurons to recognize 35 labeled keywords from audio waveforms (in contrast to the 12 keywords in prior reports). We represent each waveform as a 4096-dimensional feature vector.</li>
+					<li>Image classification on CIFAR10 and full ImageNet: We train the Resnet18 model over CIFAR10, and the VGG12 model over full ImageNet. Note that we include the complete ImageNet dataset with all 21,841 categories and report the top-10 accuracy.  Because it is so difficult to train, there are few reported results over the complete ImageNet data set.</li>
+					<li>Amazon-670k: We train a 2-layer, fully-connected neural network, which accepts a 135,909-dimensional input feature, and generates a prediction over 670,091 output labels. Further details of the learning tasks and hyperparameter tuning description are enumerated in the full version of the paper. </li>
+				</ul>
+				<p>We train Google speech and Resnet18 on CIFAR10 on three AWS CPU clusters, with 2, 4, and 8 CPU instances (m5.2xlarge).  We train the VGG model on full ImageNet and Amazon-670k extreme classification network on three AWS GPU clusters, with 2, 4, and 8 GPU machines (p3.2xlarge). Our choice of AWS was deliberate, as it is a very common learning platform, and illustrates the challenge faced by many consumers: distributed ML without a super-fast interconnect.</p>				
 			</td>
 		</tr>
 	</table>
