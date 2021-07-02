@@ -251,19 +251,9 @@
         </center>
         <p>
         <left>
-          Distributed machine learning (ML) can bring more computational resources to bear than single-machine learning, reducing training time. 
-Further, distribution allows models to be partitioned over many machines, allowing very large models to be trained—models that may be much larger than the available memory of any individual machine. 
-However, in practice, distributed ML remains challenging, primarily due to high communication costs. 
-We propose a new approach to distributed neural network learning, called independent subnet training (IST). 
-In IST, per iteration, a neural network is decomposed into a set of subnetworks of the same depth as the original network, each of which is trained locally, before the various subnets are exchanged and the process is repeated. 
-IST training has many advantages over standard data parallel approaches. 
-Because the original network is decomposed into independent parts, communication volume is reduced. 
-The decomposition makes IST naturally ``model parallel’’, and so IST scales to very large models that cannot fit on any single machine. 
-Furthermore, because the subsets are independent, communication frequency is reduced. 
-We show experimentally that IST results in training times that are much lower than data parallel approaches to distributed learning.
-Furthermore, IST scales to large models that cannot be learned using standard approaches. <br> <br>
+          We propose ResIST, a novel distributed training protocol for Resid- ual Networks (ResNets). ResIST randomly decomposes a global ResNet into several shallow sub-ResNets that are trained indepen- dently in a distributed manner for several local iterations, before having their updates synchronized and aggregated into the global model. In the next round, new sub-ResNets are randomly generated and the process repeats. By construction, per iteration, ResIST com- municates only a small portion of network parameters to each ma- chine and never uses the full model during training. Thus, ResIST reduces the communication, memory, and time requirements of ResNet training to only a fraction of the requirements of previous methods. In comparison to common protocols like data-parallel training and data-parallel training with local SGD, ResIST yields a decrease in wall-clock training time, while being competitive with respect to model performance. <br> <br>
 		
-		This paper is part of the IST project, ran by PIs Anastasios Kyrillidis, Chris Jermaine, and Yingyan Lin. More info <a href="https://akyrillidis.github.io/ist/">here.</a>
+	  This paper is part of the IST project, ran by PIs Anastasios Kyrillidis, Chris Jermaine, and Yingyan Lin. More info <a href="https://akyrillidis.github.io/ist/">here.</a>
         </left>
       </p>
       <br>
