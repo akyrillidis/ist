@@ -284,48 +284,93 @@
 		</tr>
 	</table>
 
+
+#### Efficiency. 
+As shown in Tables 4, **ResIST** significantly accelerates the ImageNet training process.
+However, due to the use of fewer local iterations and the local SGD warm-up phase, the speedup provided by **ResIST** is smaller relative to experiments on small-scale datasets.
+In Table 5, it is shown that **ResIST** can reduce the total communication volume during training, which is an important feature in the implementation of distributed systems with high computational costs.
+
+{% include image.html url="/images/resist/table_5.png" description="Table 5: Total training time on Imagenet (in hours) of models trained with both local SGD and ResIST using two and four machines to reach a fixed test accuracy." %}
+		    
+		    
 	<br><hr>
 	<table align=center width=960px>
 		<center><h1>Results</h1></center>
+		
+		<center><h2>Small-scale Image classification</h2></center>
 		<tr>
 			<td>
-				<p><b>Learning tasks and environments:</b></p>
-				<ul>
-					<li>Google Speech Commands: We learn a 2-layer network of 4096 neurons and a 3-layer network of 8192 neurons to recognize 35 labeled keywords from audio waveforms (in contrast to the 12 keywords in prior reports). We represent each waveform as a 4096-dimensional feature vector.</li>
-					<li>Image classification on CIFAR10 and full ImageNet: We train the Resnet18 model over CIFAR10, and the VGG12 model over full ImageNet. Note that we include the complete ImageNet dataset with all 21,841 categories and report the top-10 accuracy.  Because it is so difficult to train, there are few reported results over the complete ImageNet data set.</li>
-					<li>Amazon-670k: We train a 2-layer, fully-connected neural network, which accepts a 135,909-dimensional input feature, and generates a prediction over 670,091 output labels. Further details of the learning tasks and hyperparameter tuning description are enumerated in the full version of the paper. </li>
-				</ul>
-				<p>We train Google speech and Resnet18 on CIFAR10 on three AWS CPU clusters, with 2, 4, and 8 CPU instances (m5.2xlarge).  We train the VGG model on full ImageNet and Amazon-670k extreme classification network on three AWS GPU clusters, with 2, 4, and 8 GPU machines (p3.2xlarge). Our choice of AWS was deliberate, as it is a very common learning platform, and illustrates the challenge faced by many consumers: distributed ML without a super-fast interconnect.</p>																
-
+				<br>
+				<td align=center width=960px>
+					<center>
+					<td><img class="round" style="width:960px" src="./assets/img/table_2.png"/></td>
+					</center>
+				</td>
+				<p><b>Accuracy:</b>The test accuracy of models trained with both ResIST and local SGD for different numbers of machines on the ImageNet dataset is listed in the table below.
+					As can be seen, ResIST achieves comparable test accuracy (<2% difference) to local SGD in all cases where the same number of machines are used.
+					As many current image classification models overfit to the ImageNet test set and cannot generalize well to new data, models trained with both local SGD and ResIST are also evaluated on three different Imagenet V2 testing sets.
+					As shown in the table below, ResIST consistently achieves comparable test accuracy in comparison to local SGD on these supplemental test sets. 
+				</p>
+				<br>
+				<td align=center width=960px>
+					<center>
+					<td><img class="round" style="width:960px" src="./assets/img/table_3.png"/></td>
+					</center>
+				</td>
+				<p><b>Efficiency:</b>In addition to achieving comparable test accuracy to local SGD, ResIST significantly accelerates training.
+					This acceleration is due to i) fewer parameters being communicated between machines and ii) locally-trained sub-ResNets being shallower than the global model.
+					Wall-clock training times for four and eight machine experiments are presented in the table above. 
+					ResIST provides 3.58x to 3.81x speedup in comparison to local SGD.
+					For eight machine experiments, a significant speedup over four machine experiments is not observed due to the minimum depth requirement and a reduction in the number of local iterations to improve training stability.
+					We conjecture that for cases with higher communication cost at each synchronization and a similar number of synchronizations, eight worker ResIST could lead to more significant speedups in comparison to the four worker case. 
+					A visualization of the speedup provided by ResIST on the CIFAR10 and CIFAR100 datasets is illustrated in the figure below
+					From these experiments, it is clear that the communication-efficiency of ResIST allows the benefit of more devices to be better realized in the distributed setting. 
+				</p>
+				<br>
+				<td align=center width=960px>
+					<center>
+					<td><img class="round" style="width:960px" src="./assets/img/cifar10_timing-1.png"/></td>
+					</center>
+				</td>
 			</td>
 		</tr>
-	</table>
-	<br>
-				<td align=center width=960px>
-					<center>
-						<td><img class="round" style="width:960px" src="./assets/img/fig1.png"/></td> 
-					</center>
-				</td>
-		    		<p>The figure and the table above generally show that IST is much faster compared to the other frameworks for achieving high levels of accuracy on a hold-out test set. For example, IST exhibits a 4.2x speedup compared to local SGD, and 10.6x speedup compared to classical data parallel for the 2-layer Google speech model to reach 77%. IST exhibits 6.1x speedup compared to local SGD, and a 16.6x speedup comparing to data parallel for the 3-layer model to reach the accuracy of 77%. 
-				Note that this was observed even though IST was handicapped by its use of gloo for its GPU implementation. Interestingly, for the full ImageNet data set, the communication bottleneck using AWS is so severe that the smaller clusters were always faster; at each cluster size, IST was still the fastest option. For CIFAR10, because CPUs were used for training, the network is less of a bottlneck and all methods were able to scale.  This negates the IST advantage just a bit. In this case, IST was fastest to 85% accuracy, but was slower to fine-tune to 90% accuracy in 8-CPU cluster.</p>
-
+		
+		<center><h2>Large-scale Image classification</h2></center>
+		<tr>
+			<td>
 				<br>
 				<td align=center width=960px>
 					<center>
-						<td><img class="round" style="width:500px" src="./assets/img/fig2.png"/></td>
+					<td><img class="round" style="width:960px" src="./assets/img/table_4.png"/></td>
 					</center>
 				</td>
-		    		<p>Another key advantage of IST is illustrated in the table above; because it is a model-parallel framework and distributes the model to multiple machines, IST is able to scale to virtually unlimited model sizes. In this case, it can compute 2560-dimensional embedding in 8-GPU cluster (and realize the associated, additional accuracy) whereas the data parallel approaches are unable to do this.</p>
+				<p><b>Accuracy:</b>The test accuracy of models trained with both ResIST and local SGD on small-scale image classification datasets is listed in the table above. 
+					ResIST achieves comparable test accuracy in all cases where the same number of machines are used.
+					Additionally, ResIST outperforms localSGD on CIFAR100 experiments with eight machines.
+					The performance of ResIST and local SGD are strikingly similar in terms of test accuracy.
+					In fact, the performance gap between the two method does not exceed 1% in any experimental setting.
+					Furthermore, ResIST performance remains stable as the number of sub-ResNets increases, allowing greater acceleration to be achieved without degraded performance (e.g., see CIFAR100 results).
+					Generally, using four sub-ResNets yields the best performance with **ResIST.
+				</p>
 				<br>
-
-		    		<td align=center width=960px>
+				<td align=center width=960px>
 					<center>
-						<td><img class="round" style="width:500px" src="./assets/img/fig3.png"/></td>
+					<td><img class="round" style="width:960px" src="./assets/img/table_5.png"/></td>
 					</center>
 				</td>
-	<br>
-
-	
+				<p><b>Efficiency:</b>ResIST significantly accelerates the ImageNet training process.
+					However, due to the use of fewer local iterations and the local SGD warm-up phase, the speedup provided by ResIST is smaller relative to experiments on small-scale datasets.
+					In the table below, ResIST can reduce the total communication volume during training, which is an important feature in the implementation of distributed systems with high computational costs.
+				</p>				
+				<br>
+				<td align=center width=960px>
+					<center>
+					<td><img class="round" style="width:960px" src="./assets/img/table_5.png"/></td>
+					</center>
+				</td>
+			</td>
+		</tr>
+	</table>		
 
 	<hr>
 	<br>
