@@ -287,9 +287,7 @@
 	<br><hr>
 	<table align=center width=960px>
 		<center><h1>Results</h1></center>
-		
-		<center><h2>Small-scale Image classification</h2></center>
-				
+		<center><h2>Small-scale Image classification</h2></center>				
 		<tr>
 			<td>
 				<br>				
@@ -307,18 +305,8 @@
 		</center>
 	</td>
 	<table align=center width=960px>
-		<center><h1>Results</h1></center>
-		
-		<center><h2>Small-scale Image classification</h2></center>
-				
 		<tr>
-			<td>
-				<br>
-				<td align=center width=960px>
-					<center>
-					<td><img class="round" style="width:960px" src="./assets/img/table_3.png"/></td>
-					</center>
-				</td>
+			<td>				
 				<p><b>Efficiency:</b>In addition to achieving comparable test accuracy to local SGD, ResIST significantly accelerates training.
 					This acceleration is due to i) fewer parameters being communicated between machines and ii) locally-trained sub-ResNets being shallower than the global model.
 					Wall-clock training times for four and eight machine experiments are presented in the table above. 
@@ -328,15 +316,20 @@
 					A visualization of the speedup provided by ResIST on the CIFAR10 and CIFAR100 datasets is illustrated in the figure below
 					From these experiments, it is clear that the communication-efficiency of ResIST allows the benefit of more devices to be better realized in the distributed setting. 
 				</p>
-				<br>
-				<td align=center width=960px>
-					<center>
-					<td><img class="round" style="width:960px" src="./assets/img/fig_4.png"/></td>
-					</center>
-				</td>
 			</td>
 		</tr>
-		
+   	</table>
+	<td align=center width=960px>
+		<center>
+		<td><img class="round" style="width:480px" src="./assets/img/table_3.png"/></td>
+		</center>
+	</td>
+	<td align=center width=960px>
+		<center>
+		<td><img class="round" style="width:480px" src="./assets/img/fig_4.png"/></td>
+		</center>
+	</td>
+	<table align=center width=960px>	
 		<center><h2>Large-scale Image classification</h2></center>
 		<tr>
 			<td>
