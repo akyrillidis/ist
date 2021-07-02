@@ -283,15 +283,6 @@
 			</td>
 		</tr>
 	</table>
-
-
-#### Efficiency. 
-As shown in Tables 4, **ResIST** significantly accelerates the ImageNet training process.
-However, due to the use of fewer local iterations and the local SGD warm-up phase, the speedup provided by **ResIST** is smaller relative to experiments on small-scale datasets.
-In Table 5, it is shown that **ResIST** can reduce the total communication volume during training, which is an important feature in the implementation of distributed systems with high computational costs.
-
-{% include image.html url="/images/resist/table_5.png" description="Table 5: Total training time on Imagenet (in hours) of models trained with both local SGD and ResIST using two and four machines to reach a fixed test accuracy." %}
-		    
 		    
 	<br><hr>
 	<table align=center width=960px>
