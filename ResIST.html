@@ -260,31 +260,26 @@
 	<hr>
 
 	<table align=center width=960px>
-		<center><h1>The idea of Independent Subnetwork Training (IST)</h1></center>
+		<center><h1>The idea of Residual Independent Subnetwork Training (ResIST)</h1></center>
 		<tr>
 			<td>
-				The central idea in this paper, called independent subnet training (IST), facilitates combined model and data parallel distributed training. 
-				IST utilizes ideas from dropout and approximate matrix multiplication.
-				IST decomposes the NN layers into a set of subnets for the same task, by partitioning the neurons across different sites.
-				Each of those subnets is trained for one or more local stochastic gradient descent (SGD) iterations, before synchronization. <br> <br>
+				ResIST operates by partitioning the layers of a global ResNet to different, shallower sub-ResNets, training those independently, and intermittently aggregating their updates into the global model. The high-level process followed by ResIST is depicted in the figure above. 
+				As shown in the transition from row (a) to (b) within the above figure, indices of partitioned layers within the global model are randomly permuted and distributed to sub-ResNets in a round-robin fashion. Each sub-ResNet receives an equal number of convolutional blocks (e.g., see row (b)). In certain cases, residual blocks may be simultaneously partitioned to multiple sub-ResNets to ensure sufficient depth (e.g., see block 4 the figure. <br> <br>
 
-				Since subnets share no parameters in the distributed setting, synchronization requires no aggregation on these parameters, in contrast to the data parallel method---it is just an exchange of parameters.
-				Moreover, because subnets are sampled without replacement, the interdependence among them is minimized, which allows their local SGD updates for a larger number of iterations without significant ``model drifting'', before synchronizing. 
-				This reduces communication frequency. 
-				Communication costs per synchronization step are also reduced because in an n-machine cluster, each machine gets between 1/n^2 and 1/n of the weights---contrast this to data parallel training, when each machine must receive all of the weights. <br> <br>
-
-				IST has advantages over model parallel approaches.  
-				Since subnets are trained independently during local updates, no synchronization between subnetworks is required.
-				Yet, IST inherits the advantages of model parallel methods. Since each machine gets just a small fraction of the overall model, IST allows the training of very large models that cannot fit into the RAM of a node or a device. 
-				This can be an advantage when training large models using GPUs, which tend to have limited memory. <br> <br> 
+				ResIST produces subnetworks with 1/S of the global model depth, where S represents the number of independently-trained sub-ResNets.
+				The shallow sub-ResNets created by ResIST accelerate training and reduce communication in comparison to methods that communicate and train the full model.
+				After constructing the sub-ResNets, they are trained independently in a distributed manner (i.e., each on separate GPUs with different batches of data) for l iterations.
+				Following independent training, the updates from each sub-ResNet are aggregated into the global model. Aggregation sets each global network parameter to its average value across the sub-ResNets to which it was partitioned. 
+				If a parameter is only partitioned to a single sub-ResNet, aggregation simplifies to copying the parameter into the global model.
+				After aggregation, layers from the global model are re-partitioned randomly to create a new group of sub-ResNets, and this entire process is repeated.
 				
 				<p><b>Contributions.</b>This paper has the following key contributions:</p>
 					<ul>
-  						<li>We propose independent subnet training, a method for combined model parallel/data parallel training of neural networks on a cluster of machines. IST is specifically designed to work well on public clouds, where it is difficult to realize high-performance, distributed training.  These clouds often combine high performance CPUs and GPUs with relatively low-speed inter-machine inerconnects.</li>
-  						<li>We evaluate IST on speech recognition, image classification (CIFAR10 and full ImageNet), and a large-scale Amazon product recommendation task. We find that IST results in up to a 10x speedup for time-to-convergence, compared to a state-of-the-art data parallel realization, using bandwidth-optimal ring all-reduce, as well as the ``vanilla'' local SGD method.</li>
-  						<li>Because IST allows for efficient implicit model parallel training, we show that IST can solve an ``extreme'' Amazon product recommendation task with improved generalization, by increasing the embedding dimensions for larger models, which is not supported by data parallel based training.</li>
-						<li>Finally, we present theoretical results showing that decomposing a neural network into subnets for distributed training still allows for convergence under a set of standard assumptions.</li>
-					</ul>																
+  						<li>We propose a distributed training scheme for ResNets, dubbed ResIST, that partitions the layers of a global model to multiple, shallow sub-ResNets, which are then trained independently between synchronization rounds.</li>
+  						<li>We perform extensive ablation experiments to motivate the design choices for ResIST, indicating that optimal performance is achieved by i) using pre-activation ResNets, ii) scaling intermediate activations of the global network at inference time, iii) sharing layers between sub-ResNets that are sensitive to pruning, and iv) imposing a minimum depth on sub-ResNets during training.</li>
+  						<li>ResIST is shown to achieve high accuracy and time efficiency in all cases. We conduct experiments on several image classification and object detection datasets, including CIFAR10/100, ImageNet, and PascalVOC.</li>
+						<li>We utilize ResIST to train numerous different ResNet architectures (e.g., ResNet101, ResNet152, and ResNet200) and provide implementations for each in PyTorch.</li>
+					</ul>					
 			</td>
 		</tr>
 	</table>
