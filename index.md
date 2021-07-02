@@ -9,7 +9,7 @@ We propose a new class of neural network (NN) training algorithms, called indepe
 Results by this projects include: 
 
 - [Distributed Learning of Deep Neural Networks using Independent Subnet Training](./IST.html).
-- [GIST: Distributed Training for Large-Scale Graph Convolutional Networks](./GIST.html).
+- [GIST: Distributed Training for Large-Scale Graph Convolutional Networks](https://towardsdatascience.com/effortless-distributed-training-of-ultra-wide-gcns-6e9873f58a50).
 - [ResIST: Layer-Wise Decomposition of ResNets for Distributed Training](./ResIST.html).
 
 ### Publications
