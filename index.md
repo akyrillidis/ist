@@ -18,4 +18,4 @@ Results by this projects include:
 >
 > Cameron R. Wolfe, Jingkang Yang, Arindam Chowdhury, Chen Dun, Artun Bayer, Santiago Segarra, Anastasios Kyrillidis, [**''GIST: Distributed Training for Large-Scale Graph Convolutional Networks''**](https://arxiv.org/pdf/2102.10424), Arxiv Preprint, arXiv preprint arXiv:2102.10424 (2021).
 >
-> Chen Dun, Cameron R. Wolfe, Christopher M. Jermaine, Anastasios Kyrillidis, [**''ResIST: Layer-Wise Decomposition of ResNets for Distributed Training''**](), Arxiv Preprint, arXiv preprint arXiv:xxxx.xxxx (2021).
+> Chen Dun, Cameron R. Wolfe, Christopher M. Jermaine, Anastasios Kyrillidis, [**''ResIST: Layer-Wise Decomposition of ResNets for Distributed Training''**](https://arxiv.org/pdf/2107.00961.pdf), Arxiv Preprint, arXiv preprint arXiv:2107.00961 (2021).
