@@ -36,7 +36,7 @@ Some works that came **after this line of work**:
 >
 > Cameron R. Wolfe, Jingkang Yang, Arindam Chowdhury, Chen Dun, Artun Bayer, Santiago Segarra, Anastasios Kyrillidis, [**''GIST: Distributed Training for Large-Scale Graph Convolutional Networks''**](https://arxiv.org/pdf/2102.10424), Arxiv Preprint, submitted Springer special issue on Data Science and Graph Applications.
 >
-> Chen Dun, Cameron R. Wolfe, Christopher M. Jermaine, Anastasios Kyrillidis, [**''ResIST: Layer-wise decomposition of ResNets for distributed training''**]([https://arxiv.org/pdf/2107.00961.pdf](https://proceedings.mlr.press/v180/dun22a/dun22a.pdf)), Proceedings of the Thirty-Eighth Conference on Uncertainty in Artificial Intelligence, PMLR 180:610-620, 2022.
+> Chen Dun, Cameron R. Wolfe, Christopher M. Jermaine, Anastasios Kyrillidis, [**''ResIST: Layer-wise decomposition of ResNets for distributed training''**](https://proceedings.mlr.press/v180/dun22a/dun22a.pdf), Proceedings of the Thirty-Eighth Conference on Uncertainty in Artificial Intelligence, PMLR 180:610-620, 2022.
 > 
 > Fangshuo (Jasper) Liao, Anastasios Kyrillidis, [**''On the convergence of shallow neural network training with randomly masked neurons''**](https://openreview.net/pdf?id=e7mYYMSyZH), Transactions on Machine Learning Research, 2022.
 > 
