@@ -276,10 +276,12 @@ following scenario: in each iteration, we perform a gradient-based update that i
 neural network in both the forward and backward propagation. Yet, advances in regularization techniques, computationally-efficient 
 				and communication-efficient distributed training methods favor a different narrative: one would –explicitly or implicitly– train smaller
 and randomly-selected models within a large model, iteratively. This brings up the following question:
-
+				<br>
+				<br>
 				<center>“Can one meaningfully train an overparameterized ML model by iteratively training
 and combining together smaller versions of it?”
 				</center>
+				<br>
 				
 				<p><b>Motivation and connection to existing methods.</b></p>
 				The study of partial models/subnetworks that reside in a large dense network have drawn increasing attention.
@@ -303,101 +305,31 @@ comparable to centralized training. Yet, the theoretical
 understanding of IST is currently missing. Our theoretical result implies convergence guarantees for IST for
 a single hidden-layer perceptron under the simplified assumption that every worker has full data access, and
 provides insights on how the number of compute nodes affects the performance of the overall protocol.</li> 
+				</ul>
 				
 				<p><b>Contributions.</b>This paper has the following key contributions:</p>
 					<ul>
-  						<li>We propose a distributed training scheme for ResNets, dubbed ResIST, that partitions the layers of a global model to multiple, shallow sub-ResNets, which are then trained independently between synchronization rounds.</li>
-  						<li>We perform extensive ablation experiments to motivate the design choices for ResIST, indicating that optimal performance is achieved by i) using pre-activation ResNets, ii) scaling intermediate activations of the global network at inference time, iii) sharing layers between sub-ResNets that are sensitive to pruning, and iv) imposing a minimum depth on sub-ResNets during training.</li>
-  						<li>ResIST is shown to achieve high accuracy and time efficiency in all cases. We conduct experiments on several image classification and object detection datasets, including CIFAR10/100, ImageNet, and PascalVOC.</li>
-						<li>We utilize ResIST to train numerous different ResNet architectures (e.g., ResNet101, ResNet152, and ResNet200) and provide implementations for each in PyTorch.</li>
-					</ul>					
+  						<li>We provide convergence rate guarantees for i) dropout regularization, ii) multisample dropout, iii) and multi-worker IST, given a regression task on a single-hidden layer perceptron.</li>
+  						<li>We show that the NTK of surrogate models stays close to the infinite width NTK, thus being positive definite. Consequently, our work shows that training over surrogate models still enjoys linear convergence.</li>
+  						<li>For subnetworks defined by Bernoulli masks with a fixed distribution parameter, we show that aggregated gradient in the first local step is a biased estimator of the desirable gradient of the whole network, with the bias term decreasing as the number of subnetworks grows. Moreover, all aggregated gradients during local training stays close to the aggregated gradient of the first local step. This finding leads to linear convergence of the above training framework with an error term under Bernoulli masks.</li>
+						<li>For masks sampled from categorical distribution, we provide tight bounds i) on the average loss increase, when sampling a subnetwork from the whole network; ii) on the loss decrease, when the independently trained subnetworks are combined into the whole model. This finding leads to linear convergence with a slightly different error term than the Bernoulli mask scenario.</li>
+					</ul>		
+				
+				<p><b>Main statement (informal).</b> The following consitutes an informal statement out of this work; more details and results can be found in the extended version of the paper.</p>
+				
+				<br>
+				<br>
+				<center>
+					Consider the training scheme shown in Figure above. If the masks are generated from a Bernoulli distribution or categorical distribution, under
+sufficiently large over-parameterization coefficient, and sufficiently small learning rate, training the large
+model via surrogate subnetworks still converges linearly, up to an neighborhood around the optimal point.
+				</center>
+				<br>
 			</td>
 		</tr>
 	</table>
 		    
-	<br><hr>
-	<table align=center width=960px>
-		<center><h1>Small-scale Image classification</h1></center>				
-		<tr>
-			<td>
-				<br>				
-				<p><b>Accuracy:</b> The test accuracy of models trained with both ResIST and local SGD for different numbers of machines on the ImageNet dataset is listed in the table below.
-					As can be seen, ResIST achieves comparable test accuracy (<2% difference) to local SGD in all cases where the same number of machines are used.
-					As many current image classification models overfit to the ImageNet test set and cannot generalize well to new data, models trained with both local SGD and ResIST are also evaluated on three different Imagenet V2 testing sets.
-					As shown in the table below, ResIST consistently achieves comparable test accuracy in comparison to local SGD on these supplemental test sets. 
-				</p>
-			</td>
-		</tr>
-	</table>
-	<td align=center width=960px>
-		<center>
-		<td><img class="round" style="width:480px" src="./assets/img/table_2.png"/></td>
-		</center>
-	</td>
-	<table align=center width=960px>
-		<tr>
-			<td>				
-				<p><b>Efficiency:</b> In addition to achieving comparable test accuracy to local SGD, ResIST significantly accelerates training.
-					This acceleration is due to i) fewer parameters being communicated between machines and ii) locally-trained sub-ResNets being shallower than the global model.
-					Wall-clock training times for four and eight machine experiments are presented in the table above. 
-					ResIST provides 3.58x to 3.81x speedup in comparison to local SGD.
-					For eight machine experiments, a significant speedup over four machine experiments is not observed due to the minimum depth requirement and a reduction in the number of local iterations to improve training stability.
-					We conjecture that for cases with higher communication cost at each synchronization and a similar number of synchronizations, eight worker ResIST could lead to more significant speedups in comparison to the four worker case. 
-					A visualization of the speedup provided by ResIST on the CIFAR10 and CIFAR100 datasets is illustrated in the figure below.
-					From these experiments, it is clear that the communication-efficiency of ResIST allows the benefit of more devices to be better realized in the distributed setting. 
-				</p>
-			</td>
-		</tr>
-   	</table>
-	<td align=center width=960px>
-		<center>
-		<td><img class="round" style="width:480px" src="./assets/img/table_3.png"/></td>
-		</center>
-	</td>
-	<td align=center width=960px>
-		<center>
-		<td><img class="round" style="width:480px" src="./assets/img/fig_4.png"/></td>
-		</center>
-	</td>
-	<br><hr>		    
-	<center><h1>Large-scale Image classification</h1></center>
-	<br>
-	<td align=center width=960px>
-		<center>
-			<td><img class="round" style="width:960px" src="./assets/img/table_4.png"/></td>
-		</center>
-	</td>		    
-	<table align=center width=960px>	
-		<tr>
-			<td>				
-				<p><b>Accuracy:</b> The test accuracy of models trained with both ResIST and local SGD on small-scale image classification datasets is listed in the table above. 
-					ResIST achieves comparable test accuracy in all cases where the same number of machines are used.
-					Additionally, ResIST outperforms localSGD on CIFAR100 experiments with eight machines.
-					The performance of ResIST and local SGD are strikingly similar in terms of test accuracy.
-					In fact, the performance gap between the two method does not exceed 1% in any experimental setting.
-					Furthermore, ResIST performance remains stable as the number of sub-ResNets increases, allowing greater acceleration to be achieved without degraded performance (e.g., see CIFAR100 results).
-					Generally, using four sub-ResNets yields the best performance with **ResIST.
-				</p>
-			</td>
-		</tr>
-	</table>
-	<br>
-		<td align=center width=960px>
-			<center>
-			<td><img class="round" style="width:480px" src="./assets/img/table_5.png"/></td>
-			</center>
-		</td>
-	<table align=center width=960px>	
-		<tr>
-			<td>				
-				<p><b>Efficiency:</b> ResIST significantly accelerates the ImageNet training process.
-					However, due to the use of fewer local iterations and the local SGD warm-up phase, the speedup provided by ResIST is smaller relative to experiments on small-scale datasets.
-					In the table above, ResIST can reduce the total communication volume during training, which is an important feature in the implementation of distributed systems with high computational costs.
-				</p>				
-			</td>
-		</tr>
-	</table>		
-
+	
 	<hr>
 	<br>
 
@@ -406,7 +338,7 @@ provides insights on how the number of compute nodes affects the performance of 
 			<td width=400px>
 				<left>
 					<center><h1>Acknowledgements</h1></center>
-					AK, CJ acknowledges funding by the NSF/Intel (CNS-2003137).
+					AK acknowledges funding by the NSF/Intel (CNS-2003137).
 					This code for this template can be found <a href="https://github.com/richzhang/webpage-template">here</a>.
 				</left>
 			</td>
