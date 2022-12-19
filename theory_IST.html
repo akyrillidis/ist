@@ -266,18 +266,43 @@ corollaries of our main theorem. <br> <br>
 	<hr>
 
 	<table align=center width=960px>
-		<center><h1>The idea of Residual Independent Subnetwork Training (ResIST)</h1></center>
+		<center><h1>Introduction</h1></center>
 		<tr>
 			<td>
-				ResIST operates by partitioning the layers of a global ResNet to different, shallower sub-ResNets, training those independently, and intermittently aggregating their updates into the global model. The high-level process followed by ResIST is depicted in the figure above. 
-				As shown in the transition from row (a) to (b) within the above figure, indices of partitioned layers within the global model are randomly permuted and distributed to sub-ResNets in a round-robin fashion. Each sub-ResNet receives an equal number of convolutional blocks (e.g., see row (b)). In certain cases, residual blocks may be simultaneously partitioned to multiple sub-ResNets to ensure sufficient depth (e.g., see block 4 in the figure). <br> <br>
+				Overparameterized neural networks have led to both unexpected empirical success in deep learning, and new
+techniques in analyzing neural network training. While
+theoretical work in this field has led to a diverse set of new overparameterized neural network architectures and training algorithms, most efforts fall under the
+following scenario: in each iteration, we perform a gradient-based update that involves all parameters of the
+neural network in both the forward and backward propagation. Yet, advances in regularization techniques, computationally-efficient 
+				and communication-efficient distributed training methods favor a different narrative: one would –explicitly or implicitly– train smaller
+and randomly-selected models within a large model, iteratively. This brings up the following question:
 
-				ResIST produces subnetworks with 1/S of the global model depth, where S represents the number of independently-trained sub-ResNets.
-				The shallow sub-ResNets created by ResIST accelerate training and reduce communication in comparison to methods that communicate and train the full model.
-				After constructing the sub-ResNets, they are trained independently in a distributed manner (i.e., each on separate GPUs with different batches of data) for l iterations.
-				Following independent training, the updates from each sub-ResNet are aggregated into the global model. Aggregation sets each global network parameter to its average value across the sub-ResNets to which it was partitioned. 
-				If a parameter is only partitioned to a single sub-ResNet, aggregation simplifies to copying the parameter into the global model.
-				After aggregation, layers from the global model are re-partitioned randomly to create a new group of sub-ResNets, and this entire process is repeated.
+				<center>“Can one meaningfully train an overparameterized ML model by iteratively training
+and combining together smaller versions of it?”
+				</center>
+				
+				<p><b>Motivation and connection to existing methods.</b></p>
+				The study of partial models/subnetworks that reside in a large dense network have drawn increasing attention.
+				<ul>
+					<li> <em> Dropout regularization.</em> Dropout is a widely-accepted technique against overfitting in deep learning. In each training
+step, a random mask is generated from some pre-defined distribution, and used to mask-out part of the
+neurons in the neural network. Later variants of dropout include the drop-connect, multisample dropout , Gaussian dropout , and the variational dropout. Here, we restrict our attention to the vanilla dropout, and the multi-sample dropout.
+The vanilla dropout corresponds to our framework, if in the latter we sample only one mask per iteration,
+and let the subnetwork perform only one gradient descent update. The multi-sample dropout extends the
+vanilla dropout in that it samples multiple masks per iteration. For regression tasks, our theoretical result
+						implies convergence guarantees for these two scenarios on a single hidden-layer perceptron.</li>
+						
+					<li> <em>Distributed ML training.</em> Recent advances in distributed model/parallel training have led to variants of
+distributed gradient descent protocols. Yet, all training parameters are updated per outer step, which could be computationally
+and communication inefficient, especially in cases of high communication costs per round. The Independent
+Subnetwork Training (IST) protocol goes one step further: IST splits the model vertically,
+where each machine contains all layers of the neural network, but only with a (non-overlapping) subset of
+neurons being active in each layer. Multiple local SGD steps can be performed without the workers having
+to communicate. Methods in this line of work achieves higher communication efficiency and accuracy that is
+comparable to centralized training. Yet, the theoretical
+understanding of IST is currently missing. Our theoretical result implies convergence guarantees for IST for
+a single hidden-layer perceptron under the simplified assumption that every worker has full data access, and
+provides insights on how the number of compute nodes affects the performance of the overall protocol.</li> 
 				
 				<p><b>Contributions.</b>This paper has the following key contributions:</p>
 					<ul>
