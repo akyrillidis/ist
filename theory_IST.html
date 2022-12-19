@@ -241,7 +241,23 @@
         </center>
         <p>
         <left>
-          We propose ResIST, a novel distributed training protocol for Resid- ual Networks (ResNets). ResIST randomly decomposes a global ResNet into several shallow sub-ResNets that are trained indepen- dently in a distributed manner for several local iterations, before having their updates synchronized and aggregated into the global model. In the next round, new sub-ResNets are randomly generated and the process repeats. By construction, per iteration, ResIST com- municates only a small portion of network parameters to each ma- chine and never uses the full model during training. Thus, ResIST reduces the communication, memory, and time requirements of ResNet training to only a fraction of the requirements of previous methods. In comparison to common protocols like data-parallel training and data-parallel training with local SGD, ResIST yields a decrease in wall-clock training time, while being competitive with respect to model performance. <br> <br>
+          With the motive of training all the parameters of a neural network, we study why and when
+one can achieve this by iteratively creating, training, and combining randomly selected subnetworks. Such scenarios have either implicitly or explicitly emerged in the recent literature:
+see e.g., the Dropout family of regularization techniques, or some distributed ML training
+protocols that reduce communication/computation complexities, such as the Independent
+Subnet Training protocol. While these methods are studied empirically and utilized in practice, they often enjoy partial or no theoretical support, especially when applied on neural
+network-based objectives.
+In this manuscript, our focus is on overparameterized single hidden layer neural networks
+with ReLU activations in the lazy training regime. By carefully analyzing i) the subnetworks’
+neural tangent kernel, ii) the surrogate functions’ gradient, and iii) how we sample and
+combine the surrogate functions, we prove linear convergence rate of the training error –up
+to a neighborhood around the optimal point– for an overparameterized single-hidden layer
+perceptron with a regression loss. Our analysis reveals a dependency of the size of the
+neighborhood around the optimal point on the number of surrogate models and the number
+of local training steps for each selected subnetwork. Moreover, the considered framework
+generalizes and provides new insights on dropout training, multi-sample dropout training,
+as well as Independent Subnet Training; for each case, we provide convergence results as
+corollaries of our main theorem. <br> <br>
 		
 	  This paper is part of the IST project, ran by PIs Anastasios Kyrillidis, Chris Jermaine, and Yingyan Lin. More info <a href="https://akyrillidis.github.io/ist/">here.</a>
         </left>
