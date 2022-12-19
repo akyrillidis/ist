@@ -1,0 +1,392 @@
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<!--
+<script src="http://www.google.com/jsapi" type="text/javascript"></script> 
+<script type="text/javascript">google.load("jquery", "1.3.2");</script>
+-->
+
+<style type="text/css">
+  @font-face {
+   font-family: 'Avenir Book';
+   src: url("./fonts/Avenir_Book.ttf"); /* File to be stored at your site */
+   }
+
+  body {
+    font-family: "Avenir Book", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-weight:300;
+    font-size:16px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 960px;
+  }
+  h1 {
+    font-weight:300;
+  }
+  h2 {
+    font-weight:300;
+  }
+
+  p {
+    font-weight:300;
+    line-height: 1.4;
+  }
+
+  code {
+    font-size: 0.8rem;
+    margin: 0 0.2rem;
+    padding: 0.5rem 0.8rem;
+    white-space: nowrap;
+    background: #efefef;
+    border: 1px solid #d3d3d3;
+    color: #000000;
+    border-radius: 3px;
+  }
+
+  pre > code {
+    display: block;
+    white-space: pre;
+    line-height: 1.5;
+    padding: 0;
+    margin: 0;
+  }
+
+  pre.prettyprint > code {
+    border: none;
+  }
+
+
+
+  .disclaimerbox {
+    background-color: #eee;
+    border: 1px solid #eeeeee;
+    border-radius: 10px ;
+    -moz-border-radius: 10px ;
+    -webkit-border-radius: 10px ;
+    padding: 20px;
+  }
+
+  video.header-vid {
+    height: 140px;
+    border: 1px solid black;
+    border-radius: 10px ;
+    -moz-border-radius: 10px ;
+    -webkit-border-radius: 10px ;
+  }
+
+  img.header-img {
+    height: 140px;
+    border: 1px solid black;
+    border-radius: 10px ;
+    -moz-border-radius: 10px ;
+    -webkit-border-radius: 10px ;
+  }
+
+  img.rounded {
+    border: 0px solid #eeeeee;
+    border-radius: 10px ;
+    -moz-border-radius: 10px ;
+    -webkit-border-radius: 10px ;
+
+  }
+
+  a:link,a:visited
+  {
+    color: #1367a7;
+    text-decoration: none;
+  }
+  a:hover {
+    color: #208799;
+  }
+
+  td.dl-link {
+    height: 160px;
+    text-align: center;
+    font-size: 22px;
+  }
+
+  .layered-paper-big { /* modified from: http://css-tricks.com/snippets/css/layered-paper/ */
+    box-shadow:
+            0px 0px 1px 1px rgba(0,0,0,0.35), /* The top layer shadow */
+            5px 5px 0 0px #fff, /* The second layer */
+            5px 5px 1px 1px rgba(0,0,0,0.35), /* The second layer shadow */
+            10px 10px 0 0px #fff, /* The third layer */
+            10px 10px 1px 1px rgba(0,0,0,0.35), /* The third layer shadow */
+            15px 15px 0 0px #fff, /* The fourth layer */
+            15px 15px 1px 1px rgba(0,0,0,0.35), /* The fourth layer shadow */
+            20px 20px 0 0px #fff, /* The fifth layer */
+            20px 20px 1px 1px rgba(0,0,0,0.35), /* The fifth layer shadow */
+            25px 25px 0 0px #fff, /* The fifth layer */
+            25px 25px 1px 1px rgba(0,0,0,0.35); /* The fifth layer shadow */
+    margin-left: 10px;
+    margin-right: 45px;
+  }
+
+
+  .layered-paper { /* modified from: http://css-tricks.com/snippets/css/layered-paper/ */
+    box-shadow:
+            0px 0px 1px 1px rgba(0,0,0,0.35), /* The top layer shadow */
+            5px 5px 0 0px #fff, /* The second layer */
+            5px 5px 1px 1px rgba(0,0,0,0.35), /* The second layer shadow */
+            10px 10px 0 0px #fff, /* The third layer */
+            10px 10px 1px 1px rgba(0,0,0,0.35); /* The third layer shadow */
+    margin-top: 5px;
+    margin-left: 10px;
+    margin-right: 30px;
+    margin-bottom: 5px;
+  }
+
+  .vert-cent {
+    position: relative;
+      top: 50%;
+      transform: translateY(-50%);
+  }
+
+  hr
+  {
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+  }
+</style>
+
+<html>
+<head>
+	<title>LOFT: Finding Lottery Tickets through Filter-wise Training</title>
+	<meta property="og:title" content="LOFT: Finding Lottery Tickets through Filter-wise Training" />
+	<meta property="og:description" content="Paper description." />
+
+	<!-- Get from Google Analytics -->
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src=""></script> 
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+
+		gtag('config', 'UA-75863369-6');
+	</script>
+</head>
+
+<body>
+	<br>
+	<center>
+	<span style="font-size:32px">LOFT: Finding Lottery Tickets through Filter-wise Training</span><br>
+	</center>
+          <table align="center" width="960px">
+            <tbody><tr>
+                    <td align="center" width="240px">
+              <center>
+                <span style="font-size:16px"><a href="https://www.linkedin.com/in/qihan-wang">Qihan Wang</a><sup>1</sup></span>
+                </center>
+                </td>
+                    <td align="center" width="240px">
+              <center>
+                <span style="font-size:16px"><a href=" ">Chen Dun</a><sup>1</sup></span>
+                </center>
+                </td>
+                    <td align="center" width="240px">
+              <center>
+                <span style="font-size:16px"><a href=" ">Fangshuo (Jasper) Liao</a><sup>1</sup></span>
+                </center>
+                      <td align="center" width="240px">
+              <center>
+                <span style="font-size:16px"><a href="https://www.cs.rice.edu/~cmj4/">Christopher Jermaine</a><sup>1</sup></span>
+                </center>
+		 <td align="center" width="240px">
+              <center>
+                <span style="font-size:16px"><a href="http://akyrillidis.github.io/">Anastasios Kyrillidis</a><sup>1</sup></span>
+                </center>
+                </td>
+
+            </tr>
+	
+	<table align="center" width="500px">
+            <tbody><tr>                    
+                    <td align="center" width="250px">
+              <center>
+                    <span style="font-size:16px"><sup>1</sup>Rice CS</span>
+                </center>
+        </tr></tbody></table>
+	
+		    <table align="center" width="700px">
+            <tbody><tr>
+              <td align="center" width="200px">
+                <center>
+                  <br>
+                  <span style="font-size:20px">Code
+                    <a href=" "> [GitHub]</a>
+                  </span>
+                </center>
+              </td>
+
+              <td align="center" width="200px">
+                <center>
+                  <br>
+                  <span style="font-size:20px">
+                    Paper <a href="https://arxiv.org/pdf/2210.16169.pdf"> [arXiv]</a>
+                  </span>
+                </center>
+              </td>
+
+
+              <td align="center" width="200px">
+                <center>
+                  <br>
+                  <span style="font-size:20px">
+                    Cite <a href="./cite.txt"> [BibTeX]</a>
+                  </span>
+                </center>
+              </td>
+
+            </tr></tbody>
+          </table>
+		<br>
+		<td align=center width=960px>
+			<center>
+			<td><img class="round" style="width:960px" src="./assets/img/LOFT.png"/></td>
+			</center>
+		</td>
+		    
+	<br><hr>
+        <center>
+          <h2>
+            Abstract
+          </h2>
+        </center>
+        <p>
+        <left>
+          We propose ResIST, a novel distributed training protocol for Resid- ual Networks (ResNets). ResIST randomly decomposes a global ResNet into several shallow sub-ResNets that are trained indepen- dently in a distributed manner for several local iterations, before having their updates synchronized and aggregated into the global model. In the next round, new sub-ResNets are randomly generated and the process repeats. By construction, per iteration, ResIST com- municates only a small portion of network parameters to each ma- chine and never uses the full model during training. Thus, ResIST reduces the communication, memory, and time requirements of ResNet training to only a fraction of the requirements of previous methods. In comparison to common protocols like data-parallel training and data-parallel training with local SGD, ResIST yields a decrease in wall-clock training time, while being competitive with respect to model performance. <br> <br>
+		
+	  This paper is part of the IST project, ran by PIs Anastasios Kyrillidis, Chris Jermaine, and Yingyan Lin. More info <a href="https://akyrillidis.github.io/ist/">here.</a>
+        </left>
+      </p>
+      <br>
+	<hr>
+
+	<table align=center width=960px>
+		<center><h1>The idea of Residual Independent Subnetwork Training (ResIST)</h1></center>
+		<tr>
+			<td>
+				ResIST operates by partitioning the layers of a global ResNet to different, shallower sub-ResNets, training those independently, and intermittently aggregating their updates into the global model. The high-level process followed by ResIST is depicted in the figure above. 
+				As shown in the transition from row (a) to (b) within the above figure, indices of partitioned layers within the global model are randomly permuted and distributed to sub-ResNets in a round-robin fashion. Each sub-ResNet receives an equal number of convolutional blocks (e.g., see row (b)). In certain cases, residual blocks may be simultaneously partitioned to multiple sub-ResNets to ensure sufficient depth (e.g., see block 4 in the figure). <br> <br>
+
+				ResIST produces subnetworks with 1/S of the global model depth, where S represents the number of independently-trained sub-ResNets.
+				The shallow sub-ResNets created by ResIST accelerate training and reduce communication in comparison to methods that communicate and train the full model.
+				After constructing the sub-ResNets, they are trained independently in a distributed manner (i.e., each on separate GPUs with different batches of data) for l iterations.
+				Following independent training, the updates from each sub-ResNet are aggregated into the global model. Aggregation sets each global network parameter to its average value across the sub-ResNets to which it was partitioned. 
+				If a parameter is only partitioned to a single sub-ResNet, aggregation simplifies to copying the parameter into the global model.
+				After aggregation, layers from the global model are re-partitioned randomly to create a new group of sub-ResNets, and this entire process is repeated.
+				
+				<p><b>Contributions.</b>This paper has the following key contributions:</p>
+					<ul>
+  						<li>We propose a distributed training scheme for ResNets, dubbed ResIST, that partitions the layers of a global model to multiple, shallow sub-ResNets, which are then trained independently between synchronization rounds.</li>
+  						<li>We perform extensive ablation experiments to motivate the design choices for ResIST, indicating that optimal performance is achieved by i) using pre-activation ResNets, ii) scaling intermediate activations of the global network at inference time, iii) sharing layers between sub-ResNets that are sensitive to pruning, and iv) imposing a minimum depth on sub-ResNets during training.</li>
+  						<li>ResIST is shown to achieve high accuracy and time efficiency in all cases. We conduct experiments on several image classification and object detection datasets, including CIFAR10/100, ImageNet, and PascalVOC.</li>
+						<li>We utilize ResIST to train numerous different ResNet architectures (e.g., ResNet101, ResNet152, and ResNet200) and provide implementations for each in PyTorch.</li>
+					</ul>					
+			</td>
+		</tr>
+	</table>
+		    
+	<br><hr>
+	<table align=center width=960px>
+		<center><h1>Small-scale Image classification</h1></center>				
+		<tr>
+			<td>
+				<br>				
+				<p><b>Accuracy:</b> The test accuracy of models trained with both ResIST and local SGD for different numbers of machines on the ImageNet dataset is listed in the table below.
+					As can be seen, ResIST achieves comparable test accuracy (<2% difference) to local SGD in all cases where the same number of machines are used.
+					As many current image classification models overfit to the ImageNet test set and cannot generalize well to new data, models trained with both local SGD and ResIST are also evaluated on three different Imagenet V2 testing sets.
+					As shown in the table below, ResIST consistently achieves comparable test accuracy in comparison to local SGD on these supplemental test sets. 
+				</p>
+			</td>
+		</tr>
+	</table>
+	<td align=center width=960px>
+		<center>
+		<td><img class="round" style="width:480px" src="./assets/img/table_2.png"/></td>
+		</center>
+	</td>
+	<table align=center width=960px>
+		<tr>
+			<td>				
+				<p><b>Efficiency:</b> In addition to achieving comparable test accuracy to local SGD, ResIST significantly accelerates training.
+					This acceleration is due to i) fewer parameters being communicated between machines and ii) locally-trained sub-ResNets being shallower than the global model.
+					Wall-clock training times for four and eight machine experiments are presented in the table above. 
+					ResIST provides 3.58x to 3.81x speedup in comparison to local SGD.
+					For eight machine experiments, a significant speedup over four machine experiments is not observed due to the minimum depth requirement and a reduction in the number of local iterations to improve training stability.
+					We conjecture that for cases with higher communication cost at each synchronization and a similar number of synchronizations, eight worker ResIST could lead to more significant speedups in comparison to the four worker case. 
+					A visualization of the speedup provided by ResIST on the CIFAR10 and CIFAR100 datasets is illustrated in the figure below.
+					From these experiments, it is clear that the communication-efficiency of ResIST allows the benefit of more devices to be better realized in the distributed setting. 
+				</p>
+			</td>
+		</tr>
+   	</table>
+	<td align=center width=960px>
+		<center>
+		<td><img class="round" style="width:480px" src="./assets/img/table_3.png"/></td>
+		</center>
+	</td>
+	<td align=center width=960px>
+		<center>
+		<td><img class="round" style="width:480px" src="./assets/img/fig_4.png"/></td>
+		</center>
+	</td>
+	<br><hr>		    
+	<center><h1>Large-scale Image classification</h1></center>
+	<br>
+	<td align=center width=960px>
+		<center>
+			<td><img class="round" style="width:960px" src="./assets/img/table_4.png"/></td>
+		</center>
+	</td>		    
+	<table align=center width=960px>	
+		<tr>
+			<td>				
+				<p><b>Accuracy:</b> The test accuracy of models trained with both ResIST and local SGD on small-scale image classification datasets is listed in the table above. 
+					ResIST achieves comparable test accuracy in all cases where the same number of machines are used.
+					Additionally, ResIST outperforms localSGD on CIFAR100 experiments with eight machines.
+					The performance of ResIST and local SGD are strikingly similar in terms of test accuracy.
+					In fact, the performance gap between the two method does not exceed 1% in any experimental setting.
+					Furthermore, ResIST performance remains stable as the number of sub-ResNets increases, allowing greater acceleration to be achieved without degraded performance (e.g., see CIFAR100 results).
+					Generally, using four sub-ResNets yields the best performance with **ResIST.
+				</p>
+			</td>
+		</tr>
+	</table>
+	<br>
+		<td align=center width=960px>
+			<center>
+			<td><img class="round" style="width:480px" src="./assets/img/table_5.png"/></td>
+			</center>
+		</td>
+	<table align=center width=960px>	
+		<tr>
+			<td>				
+				<p><b>Efficiency:</b> ResIST significantly accelerates the ImageNet training process.
+					However, due to the use of fewer local iterations and the local SGD warm-up phase, the speedup provided by ResIST is smaller relative to experiments on small-scale datasets.
+					In the table above, ResIST can reduce the total communication volume during training, which is an important feature in the implementation of distributed systems with high computational costs.
+				</p>				
+			</td>
+		</tr>
+	</table>		
+
+	<hr>
+	<br>
+
+	<table align=center width=900px>
+		<tr>
+			<td width=400px>
+				<left>
+					<center><h1>Acknowledgements</h1></center>
+					AK, CJ acknowledges funding by the NSF/Intel (CNS-2003137).
+					This code for this template can be found <a href="https://github.com/richzhang/webpage-template">here</a>.
+				</left>
+			</td>
+		</tr>
+	</table>
+
+<br>
+</body>
+</html>
+
