@@ -12,8 +12,8 @@ Results by this projects include:
 - [GIST: Distributed Training for Large-Scale Graph Convolutional Networks](https://towardsdatascience.com/effortless-distributed-training-of-ultra-wide-gcns-6e9873f58a50).
 - [ResIST: Layer-Wise Decomposition of ResNets for Distributed Training](./ResIST.html).
 - [On the Convergence of Shallow Neural Network Training with Randomly Masked Neurons](./theory_IST.html)
-- [LOFT: Finding Lottery Tickets through Filter-wise Training](./LOFT.html)
-- [Efficient and Light-Weight Federated Learning via Asynchronous Distributed Dropout](./AsyncDrop.html)
+- [LOFT: Finding Lottery Tickets through Filter-wise Training]()
+- [Efficient and Light-Weight Federated Learning via Asynchronous Distributed Dropout]()
 
 Some works that came **after this line of work**:
 
